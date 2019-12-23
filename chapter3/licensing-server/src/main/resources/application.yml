@@ -1,0 +1,14 @@
+mybatis:
+  mapper-locations: classpath:com/taoing/licensingserver/mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  type-aliases-package: com.taoing.licensingserver.model
+
+mapper:
+  mappers: com.taoing.licensingserver.base.MyMapper
+  not-empty: false
+  identity: mysql
+
+example:
+  my:
+    value: licensingserver-default
