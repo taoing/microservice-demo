@@ -1,5 +1,6 @@
 package com.taoing.licensingservice.clients;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.taoing.licensingservice.model.Organization;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,15 @@ public class OrganizationDiscoveryClient {
                         HttpMethod.GET,
                         null, Organization.class, orgId);
         return restExchange.getBody();
+    }
+
+    @HystrixCommand
+    public Organization getOrg2(Integer orgId) {
+        try {
+            Thread.sleep(11000);
+        } catch (InterruptedException e) {
+            log.error(e.getMessage(), e);
+        }
+        return this.getOrg(orgId);
     }
 }

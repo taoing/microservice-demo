@@ -3,10 +3,12 @@ package com.taoing.organizationservice.service.impl;
 import com.taoing.organizationservice.mapper.OrganizationMapper;
 import com.taoing.organizationservice.model.Organization;
 import com.taoing.organizationservice.service.OrganizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class OrganizationServiceImpl implements OrganizationService {
 
     private OrganizationMapper mapper;

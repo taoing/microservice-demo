@@ -24,3 +24,7 @@ mapper:
 example:
   my:
     value: licensingservice-default
+
+feign:
+  hystrix:
+    enabled: true
