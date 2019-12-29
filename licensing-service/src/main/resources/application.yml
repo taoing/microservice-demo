@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+mybatis:
+  mapper-locations: classpath:com/taoing/licensingservice/mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  type-aliases-package: com.taoing.licensingservice.model
+
+mapper:
+  mappers: com.taoing.licensingservice.base.MyMapper
+  not-empty: false
+  identity: mysql
+
+example:
+  my:
+    value: licensingservice-default
