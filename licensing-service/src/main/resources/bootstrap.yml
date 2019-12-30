@@ -2,8 +2,10 @@ spring:
   application:
     name: licensingservice
   profiles:
-    active:
-      dev
+    active: dev
   cloud:
     config:
-      uri: http://localhost:8888
+      enabled: true
+      discovery:
+        enabled: true
+        service-id: configserver
