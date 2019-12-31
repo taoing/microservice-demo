@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @description: zuul路由后置过滤器, 调用目标服务返回后过滤
  * @author: mian.tao

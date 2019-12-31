@@ -1,8 +1,15 @@
 zuul:
+  ignored-services: "*"
+  prefix: /api
   routes:
-    licensestatic:
-      path: /licensestatic/**
-      url: http://licenseservice-static:9003
+    routes:
+      organizationservice: /organization/**
+      licensingservice: /licensing/**
+      configserver: /configserver/**
+      specialroutesservcie: /specialroutesservice/**
+      licensestatic:
+        path: /licensestatic/**
+        url: http://licenseservice-static:9003
   sensitiveHeaders: Cookie,Set-Cookie
   debug:
     request: true
@@ -29,8 +36,8 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 65000
+            timeoutInMilliseconds: 20000
 
 ribbon:
   ConnectTimeout: 3000
-  ReadTimeout: 60000
+  ReadTimeout: 15000

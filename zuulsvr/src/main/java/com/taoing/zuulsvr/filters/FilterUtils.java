@@ -1,6 +1,7 @@
 package com.taoing.zuulsvr.filters;
 
 import com.netflix.zuul.context.RequestContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
  * @author: mian.tao
  * @date: 2019-12-31 13:47
  */
+@Slf4j
 @Component
 public class FilterUtils {
 
@@ -70,10 +72,13 @@ public class FilterUtils {
 
     public String getServiceId() {
         RequestContext ctx = RequestContext.getCurrentContext();
+        // 获取当前路由url的eureka serviceId
         // 如果使用静态url路由, serviceId为null
-        if (ctx.get("serviceId") == null) {
+        String serviceId = (String) ctx.get("serviceId");
+        log.info("current serviceId: {}", serviceId);
+        if (serviceId == null) {
             return "";
         }
-        return ctx.get("serviceId").toString();
+        return serviceId;
     }
 }
