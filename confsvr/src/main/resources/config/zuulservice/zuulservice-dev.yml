@@ -1,0 +1,36 @@
+zuul:
+  routes:
+    licensestatic:
+      path: /licensestatic/**
+      url: http://licenseservice-static:9003
+  sensitiveHeaders: Cookie,Set-Cookie
+  debug:
+    request: true
+
+#zuul:
+#  routes:
+#    licensestatic:
+#      path: /licensestatic/**
+#      serviceId: licensestatic
+#
+## 禁用ribbon中的eureka支持
+#ribbon:
+#  eureka:
+#    enabled: false
+#
+#licensestatic:
+#  ribbon:
+#    listOfServers: http://licenseservice-static:9003,http://licensestatic-static2:9004
+
+# 全局配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 65000
+
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000

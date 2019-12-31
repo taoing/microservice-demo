@@ -1,4 +1,4 @@
-package com.taoing.licensingservice.utils;
+package com.taoing.zuulsvr.utils;
 
 import org.springframework.util.Assert;
 
