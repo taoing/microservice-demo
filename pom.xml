@@ -14,6 +14,14 @@
     <name>microservice-demo</name>
     <description>Demo project for Spring Boot</description>
 
+    <modules>
+        <module>confsvr</module>
+        <module>eurekasvr</module>
+        <module>licensing-service</module>
+        <module>organization-service</module>
+        <module>zuulsvr</module>
+    </modules>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
