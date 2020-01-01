@@ -6,6 +6,7 @@ public interface DiscoveryService {
 
     /**
      * eureka客户端从eureka service获取的服务注册信息
+     *
      * @return
      */
     List<String> getEurekaServices();

@@ -16,7 +16,7 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class TrackingFilter extends ZuulFilter {
-    private static final int FILTER_ORDER  = 1;
+    private static final int FILTER_ORDER = 1;
     private static final boolean SHOULD_FILTER = true;
 
     @Autowired

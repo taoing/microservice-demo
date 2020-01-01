@@ -74,6 +74,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 查询路由配置记录
+     *
      * @param serviceName
      * @return
      */
@@ -94,6 +95,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 构建新的路由uri: http://ip:port/...
+     *
      * @param oldEndpoint
      * @param newEndpoint
      * @param serviceName
@@ -109,6 +111,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 获取请求的标准动词
+     *
      * @param request
      * @return
      */
@@ -119,6 +122,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 构建http协议主机头
+     *
      * @param host
      * @return
      */
@@ -129,6 +133,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 获取请求url中的查询参数为Header[]
+     *
      * @param headers
      * @return
      */
@@ -144,6 +149,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 使用httpClient转发请求
+     *
      * @param httpClient
      * @param httpHost
      * @param httpRequest
@@ -157,6 +163,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 反转Header[]为MultiValueMap
+     *
      * @param headers
      * @return
      */
@@ -174,6 +181,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 获取代表请求body的输入流
+     *
      * @param request
      * @return
      */
@@ -189,6 +197,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 将响应写入辅助对象
+     *
      * @param response
      * @throws IOException
      */
@@ -200,6 +209,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 转发请求
+     *
      * @param httpClient
      * @param verb
      * @param uri
@@ -211,8 +221,8 @@ public class SpecialRoutesFilter extends ZuulFilter {
      * @throws Exception
      */
     private HttpResponse forward(HttpClient httpClient, String verb, String uri,
-                                HttpServletRequest request, MultiValueMap<String, String> headers,
-                                MultiValueMap<String, String> params, InputStream requestEntity) throws Exception {
+                                 HttpServletRequest request, MultiValueMap<String, String> headers,
+                                 MultiValueMap<String, String> params, InputStream requestEntity) throws Exception {
         Map<String, Object> info = this.helper.debug(verb, uri, headers, params, requestEntity);
         URL host = new URL(uri);
         HttpHost httpHost = getHttpHost(host);
@@ -249,6 +259,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 使用随机数比较权重, 判断是否使用指定路由
+     *
      * @param testRoute
      * @return
      */
@@ -270,6 +281,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
      * 方法bug:
      * 1. 可以正常请求到目标服务获取响应, 但不能阻止zuul内部默认过滤器的后续执行, 导致方法无效
      * 2. 阻止zuul内部默认过滤器的后续执行后, 返回响应给客户端时报错
+     *
      * @param route
      */
     private void forwardToSpecialRoute(String route) {

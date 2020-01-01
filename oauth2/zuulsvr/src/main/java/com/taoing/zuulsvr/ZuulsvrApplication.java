@@ -24,6 +24,7 @@ public class ZuulsvrApplication {
 
     /**
      * 构造支持ribbon负载均衡的restTemplate
+     *
      * @return
      */
     @LoadBalanced

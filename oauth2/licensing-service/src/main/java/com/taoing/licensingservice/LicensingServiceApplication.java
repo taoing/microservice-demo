@@ -27,6 +27,7 @@ public class LicensingServiceApplication {
 
     /**
      * 构建基于ribbon的RestTemplate bean
+     *
      * @return
      */
     @LoadBalanced

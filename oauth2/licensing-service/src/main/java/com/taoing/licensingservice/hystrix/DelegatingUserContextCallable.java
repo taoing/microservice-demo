@@ -19,8 +19,7 @@ public class DelegatingUserContextCallable<V> implements Callable<V> {
 
         try {
             return delegate.call();
-        }
-        finally {
+        } finally {
             this.originalUserContext = null;
         }
     }

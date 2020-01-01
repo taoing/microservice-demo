@@ -15,7 +15,7 @@ logging:
   level:
     com.netflix: WARN
     org.springframework.web: WARN
-    com.taoing.organizationservice: DEBUG
+    com.taoing.organizationservice: INFO
 
 mybatis:
   mapper-locations: classpath:com/taoing/organizationservice/mapper/*.xml

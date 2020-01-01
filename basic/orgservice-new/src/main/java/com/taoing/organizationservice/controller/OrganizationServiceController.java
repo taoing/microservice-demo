@@ -23,7 +23,7 @@ public class OrganizationServiceController {
 
     @RequestMapping(value = "/{orgId}", method = RequestMethod.GET)
     public Organization getOrg(@PathVariable("orgId") Integer orgId) {
-        log.debug("Looking up data for org {}", orgId);
+        log.info("Looking up data for org {}", orgId);
 
         Organization org = this.service.getOrg(orgId);
         if (org != null) {

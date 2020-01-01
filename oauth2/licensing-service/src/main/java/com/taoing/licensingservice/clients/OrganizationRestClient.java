@@ -23,9 +23,9 @@ public class OrganizationRestClient {
     }
 
     /**
-     * @HystrixCommand 注解在最外层调用的类方法上才有效
      * @param orgId
      * @return
+     * @HystrixCommand 注解在最外层调用的类方法上才有效
      */
     @HystrixCommand
     public Organization getOrg(Integer orgId) {

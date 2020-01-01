@@ -59,11 +59,11 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     /**
+     * @param organizationId
+     * @return
      * @HystrixCommand注解被用于使用 Hystrix 断路器包装方法, 注解在最外层调用的类方法上才有效
      * commandProperties 属性让你提供额外的属性来自定义 Hystrix,
      * execution.isolation.thread.timeoutInMilliseconds 用于设置断路器的超时时间长度（以毫秒为单位）
-     * @param organizationId
-     * @return
      */
     @Override
     @HystrixCommand(
@@ -135,6 +135,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     /**
      * HystrixCommand的回退方法
+     *
      * @param organizationId
      * @return
      */

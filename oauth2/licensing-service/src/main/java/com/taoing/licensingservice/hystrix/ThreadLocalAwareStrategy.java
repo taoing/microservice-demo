@@ -22,6 +22,7 @@ public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy {
     /**
      * Hystrix 叧允许你为应用程序定义一个 HystrixConcurrencyStrategy,
      * 保留spring cloud已有的HystrixConcurrencyStrategy
+     *
      * @param existingConcurrencyStrategy
      */
     public ThreadLocalAwareStrategy(
@@ -42,7 +43,7 @@ public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy {
             HystrixRequestVariableLifecycle<T> rv) {
         return existingConcurrencyStrategy != null
                 ? existingConcurrencyStrategy.getRequestVariable(rv)
-                :super.getRequestVariable(rv);
+                : super.getRequestVariable(rv);
     }
 
     @Override
@@ -60,6 +61,7 @@ public class ThreadLocalAwareStrategy extends HystrixConcurrencyStrategy {
 
     /**
      * 核心重写方法
+     *
      * @param callable
      * @param <T>
      * @return
