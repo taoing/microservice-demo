@@ -35,7 +35,7 @@ public class MyUserDetailsService implements UserDetailsService {
         user = this.userMapper.selectOne(user);
         if (user == null) {
             log.warn("User: {} not found", username);
-            return null;
+            throw new UsernameNotFoundException("username: " + username);
         }
         List<String> roles = this.userMapper.getUserRoles(user.getId());
         MyUserDetails userDetails = new MyUserDetails();

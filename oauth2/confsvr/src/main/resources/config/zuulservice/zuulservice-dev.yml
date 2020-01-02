@@ -6,11 +6,11 @@ zuul:
       organizationservice: /organization/**
       licensingservice: /licensing/**
       configserver: /configserver/**
-      specialroutesservcie: /specialroutesservice/**
+      authenticationservice: /auth/**
       licensestatic:
         path: /licensestatic/**
         url: http://licenseservice-static:9003
-  sensitiveHeaders: Cookie,Set-Cookie
+  sensitiveHeaders: Authorization
   debug:
     request: true
 

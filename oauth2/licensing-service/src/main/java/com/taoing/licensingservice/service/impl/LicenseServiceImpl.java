@@ -2,8 +2,6 @@ package com.taoing.licensingservice.service.impl;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
-import com.taoing.licensingservice.clients.OrganizationDiscoveryClient;
-import com.taoing.licensingservice.clients.OrganizationFeignClient;
 import com.taoing.licensingservice.clients.OrganizationRestClient;
 import com.taoing.licensingservice.config.ServiceConfig;
 import com.taoing.licensingservice.mapper.LicenseMapper;
@@ -25,11 +23,7 @@ public class LicenseServiceImpl implements LicenseService {
 
     private LicenseMapper mapper;
 
-    private OrganizationDiscoveryClient organizationDiscoveryClient;
-
     private OrganizationRestClient organizationRestClient;
-
-    private OrganizationFeignClient organizationFeignClient;
 
     private ServiceConfig config;
 
@@ -39,18 +33,8 @@ public class LicenseServiceImpl implements LicenseService {
     }
 
     @Autowired
-    public void setOrganizationDiscoveryClient(OrganizationDiscoveryClient organizationDiscoveryClient) {
-        this.organizationDiscoveryClient = organizationDiscoveryClient;
-    }
-
-    @Autowired
     public void setOrganizationRestClient(OrganizationRestClient organizationRestClient) {
         this.organizationRestClient = organizationRestClient;
-    }
-
-    @Autowired
-    public void setOrganizationFeignClient(OrganizationFeignClient organizationFeignClient) {
-        this.organizationFeignClient = organizationFeignClient;
     }
 
     @Autowired
@@ -95,7 +79,7 @@ public class LicenseServiceImpl implements LicenseService {
     public License getLicense(Integer organizationId, Integer licenseId, String clientType) {
         License license = this.mapper.selectByPrimaryKey(licenseId);
 
-        Organization org = this.retrieveOrgInfo(organizationId, clientType);
+        Organization org = this.organizationRestClient.getOrg(organizationId);
         if (org != null) {
             license.setOrganizationName(org.getName());
             license.setContactName(org.getContactName());
@@ -112,26 +96,26 @@ public class LicenseServiceImpl implements LicenseService {
         return this.mapper.insert(license);
     }
 
-    private Organization retrieveOrgInfo(Integer orgId, String clientType) {
-        Organization org;
-        switch (clientType) {
-            case "feign":
-                log.info("I am using the feign client");
-                org = organizationFeignClient.getOrg(orgId);
-                break;
-            case "rest":
-                log.info("I am using the rest client");
-                org = organizationRestClient.getOrg(orgId);
-                break;
-            case "discovery":
-                log.info("I am using the discovery client");
-                org = organizationDiscoveryClient.getOrg(orgId);
-                break;
-            default:
-                org = organizationRestClient.getOrg(orgId);
-        }
-        return org;
-    }
+//    private Organization retrieveOrgInfo(Integer orgId, String clientType) {
+//        Organization org;
+//        switch (clientType) {
+//            case "feign":
+//                log.info("I am using the feign client");
+//                org = organizationFeignClient.getOrg(orgId);
+//                break;
+//            case "rest":
+//                log.info("I am using the rest client");
+//                org = organizationRestClient.getOrg(orgId);
+//                break;
+//            case "discovery":
+//                log.info("I am using the discovery client");
+//                org = organizationDiscoveryClient.getOrg(orgId);
+//                break;
+//            default:
+//                org = organizationRestClient.getOrg(orgId);
+//        }
+//        return org;
+//    }
 
     /**
      * HystrixCommand的回退方法

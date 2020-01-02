@@ -28,3 +28,8 @@ example:
 feign:
   hystrix:
     enabled: true
+
+security:
+  oauth2:
+    resource:
+      user-info-uri: http://localhost:8890/auth/user

@@ -34,7 +34,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void deleteOrg(Organization org) {
-        this.mapper.deleteByPrimaryKey(org.getId());
+    public void deleteOrg(Integer orgId) {
+        this.mapper.deleteByPrimaryKey(orgId);
     }
 }

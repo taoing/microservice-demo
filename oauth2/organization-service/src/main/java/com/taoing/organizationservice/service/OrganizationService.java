@@ -10,5 +10,5 @@ public interface OrganizationService {
 
     void updateOrg(Organization org);
 
-    void deleteOrg(Organization org);
+    void deleteOrg(Integer orgId);
 }

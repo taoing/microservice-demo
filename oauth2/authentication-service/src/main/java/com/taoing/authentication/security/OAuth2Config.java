@@ -40,7 +40,20 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
                 // 支持的授权类型
                 .authorizedGrantTypes("refresh_token", "password", "client", "client_credentials")
                 // 有效作用域
-                .scopes("webclient", "mobileclient");
+                .scopes("webclient", "mobileclient")
+                // token有效期
+                .accessTokenValiditySeconds(43200)
+                // refreshToken有效期
+                .refreshTokenValiditySeconds(864000)
+                .and()
+                .withClient("webapp")
+                .secret(passwordEncoder.encode("thisissecret"))
+                .authorizedGrantTypes("password", "refresh_token")
+                .scopes("webclient", "mobileclient")
+                // token有效期
+                .accessTokenValiditySeconds(60)
+                // refreshToken有效期
+                .refreshTokenValiditySeconds(864000);
     }
 
     /**

@@ -4,7 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -18,11 +17,10 @@ import java.util.Map;
 /**
  * @EnableAuthorizationServer 启用OAuth2的认证端点, 作为一个OAuth2的认证服务器,
  * 在spring-security-oauth2的2.4.0.RELEASE版本中, 该注解已过时, 需使用spring security的其他方式
- * @EnableResourceServer 启用一个spring security过滤器认证请求的token
  */
 @EnableEurekaClient
-@EnableAuthorizationServer
 @EnableResourceServer
+@EnableAuthorizationServer
 @RestController
 @SpringBootApplication
 @MapperScan(basePackages = "com.taoing.authentication.mapper")

@@ -2,10 +2,10 @@ package com.taoing.licensingservice.clients;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.taoing.licensingservice.model.Organization;
-import com.taoing.licensingservice.utils.GeneralUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,12 +15,15 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class OrganizationRestClient {
 
-    private RestTemplate restTemplate;
+//    private RestTemplate restTemplate;
+//
+//    @Autowired
+//    public void setRestTemplate(RestTemplate restTemplate) {
+//        this.restTemplate = restTemplate;
+//    }
 
     @Autowired
-    public void setRestTemplate(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
+    private OAuth2RestTemplate restTemplate;
 
     /**
      * @param orgId
@@ -29,8 +32,6 @@ public class OrganizationRestClient {
      */
     @HystrixCommand
     public Organization getOrg(Integer orgId) {
-        GeneralUtils.randomlyRunLong(11000);
-
         ResponseEntity<Organization> restExchange =
                 restTemplate.exchange("http://organizationservice/v1/organizations/{orgId}",
                         HttpMethod.GET,

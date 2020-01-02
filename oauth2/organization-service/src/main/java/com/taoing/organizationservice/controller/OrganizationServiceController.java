@@ -2,10 +2,12 @@ package com.taoing.organizationservice.controller;
 
 import com.taoing.organizationservice.model.Organization;
 import com.taoing.organizationservice.service.OrganizationService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RequestMapping(value = "/v1/organizations")
 @RestController
 public class OrganizationServiceController {
@@ -22,19 +24,21 @@ public class OrganizationServiceController {
         return this.service.getOrg(orgId);
     }
 
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    public void updateOrg(@RequestBody Organization org) {
+    @RequestMapping(value = "/{orgId}", method = RequestMethod.PUT)
+    public void updateOrg(@PathVariable("orgId") Integer orgId, @RequestBody Organization org) {
         this.service.updateOrg(org);
     }
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public void saveOrg(@RequestBody Organization org) {
+    @RequestMapping(value = "/{orgId}", method = RequestMethod.POST)
+    public void saveOrg(@PathVariable("orgId") Integer orgId, @RequestBody Organization org) {
         this.service.saveOrg(org);
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{orgId}", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@RequestBody Organization org) {
-        this.service.deleteOrg(org);
+    public void delete(@PathVariable("orgId") Integer orgId) {
+        log.info("*** simulating delete orgId: {}***", orgId);
+
+        this.service.deleteOrg(null);
     }
 }
