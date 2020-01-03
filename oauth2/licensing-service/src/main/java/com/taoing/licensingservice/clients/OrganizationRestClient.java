@@ -15,15 +15,12 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class OrganizationRestClient {
 
-//    private RestTemplate restTemplate;
-//
-//    @Autowired
-//    public void setRestTemplate(RestTemplate restTemplate) {
-//        this.restTemplate = restTemplate;
-//    }
+    private RestTemplate restTemplate;
 
     @Autowired
-    private OAuth2RestTemplate restTemplate;
+    public void setRestTemplate(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     /**
      * @param orgId

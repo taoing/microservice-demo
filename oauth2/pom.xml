@@ -21,6 +21,7 @@
         <module>licensing-service</module>
         <module>organization-service</module>
         <module>zuulsvr</module>
+        <module>authentication-service</module>
     </modules>
 
     <properties>
