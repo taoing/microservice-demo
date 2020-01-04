@@ -1,0 +1,24 @@
+server:
+  port: 9002
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+mybatis:
+  mapper-locations: classpath:com/taoing/organizationservice/mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  type-aliases-package: com.taoing.organizationservice.model
+
+# 不需要要回调认证服务来验证令牌的内容，因为令牌的签名和内容（如令牌到期时间和用户信息）可以通过接收的微服务检验.
+## 令牌token校验uri
+#security:
+#  oauth2:
+#    resource:
+#      user-info-uri: http://localhost:8890/auth/user
