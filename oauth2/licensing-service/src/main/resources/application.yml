@@ -29,6 +29,10 @@ feign:
   hystrix:
     enabled: true
 
+# 指定oauth2认证服务器的token认证授权端点,
+# 外部访问受保护的服务接口时, UserInfoTokenServices bean请求认证服务的token认证端点,
+# 成功返回后, 构造为OAuth2Authentication对象, 存储在请求上下文中,
+# 可从security的SecurityContext或HttpServletRequest获取
 security:
   oauth2:
     resource:
