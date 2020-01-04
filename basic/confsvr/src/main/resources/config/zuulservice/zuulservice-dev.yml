@@ -2,14 +2,13 @@ zuul:
   ignored-services: "*"
   prefix: /api
   routes:
-    routes:
-      organizationservice: /organization/**
-      licensingservice: /licensing/**
-      configserver: /configserver/**
-      specialroutesservcie: /specialroutesservice/**
-      licensestatic:
-        path: /licensestatic/**
-        url: http://licenseservice-static:9003
+    organizationservice: /organization/**
+    licensingservice: /licensing/**
+    configserver: /configserver/**
+    specialroutesservcie: /specialroutesservice/**
+    licensestatic:
+      path: /licensestatic/**
+      url: http://licenseservice-static:9003
   sensitiveHeaders: Cookie,Set-Cookie
   debug:
     request: true

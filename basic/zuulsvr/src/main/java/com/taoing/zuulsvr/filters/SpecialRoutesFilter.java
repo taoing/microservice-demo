@@ -193,6 +193,7 @@ public class SpecialRoutesFilter extends ZuulFilter {
      * @throws IOException
      */
     private void setResponse(HttpResponse response) throws IOException {
+        RequestContext.getCurrentContext().set("zuulResponse", response);
         this.helper.setResponse(response.getStatusLine().getStatusCode(),
                 response.getEntity() == null ? null : response.getEntity().getContent(),
                 revertHeaders(response.getAllHeaders()));
@@ -243,6 +244,8 @@ public class SpecialRoutesFilter extends ZuulFilter {
         }
         httpRequest.setHeaders(convertHeaders(headers));
         HttpResponse zuulResponse = forwardRequest(httpClient, httpHost, httpRequest);
+        this.helper.appendDebug(info, zuulResponse.getStatusLine().getStatusCode(),
+                revertHeaders(zuulResponse.getAllHeaders()));
 
         return zuulResponse;
     }
@@ -267,9 +270,6 @@ public class SpecialRoutesFilter extends ZuulFilter {
 
     /**
      * 转发请求到指定路由
-     * 方法bug:
-     * 1. 可以正常请求到目标服务获取响应, 但不能阻止zuul内部默认过滤器的后续执行, 导致方法无效
-     * 2. 阻止zuul内部默认过滤器的后续执行后, 返回响应给客户端时报错
      * @param route
      */
     private void forwardToSpecialRoute(String route) {
@@ -287,7 +287,12 @@ public class SpecialRoutesFilter extends ZuulFilter {
         this.helper.addIgnoredHeaders();
         HttpResponse response = null;
 
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+        /**
+         * httpClient用完后立即关闭, 将response写到zuul的返回响应时会抛出异常,不能完成响应
+         * 参照zuul的SimpleHostRoutingFilter, 不在此处关闭httpClient
+         */
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        try {
             response = forward(httpClient, verb, route, request, headers, params, requestEntity);
             setResponse(response);
         } catch (Exception e) {
@@ -304,12 +309,13 @@ public class SpecialRoutesFilter extends ZuulFilter {
             String route = buildRouteString(ctx.getRequest().getRequestURI(),
                     abTestRoute.getEndpoint(),
                     ctx.get("serviceId").toString());
-            // 该方法有bug
-//            forwardToSpecialRoute(route);
+            // serviceId置为null, 防止zuul后续RibbonRoutingFilter的路由
+            ctx.set("serviceId", null);
+            forwardToSpecialRoute(route);
 
             // ctx的serviceId决定后续往哪里路由
             // 更新RequestContext中的serviceId, zuul的RibbonRoutingFilter过滤器自动路由请求
-            ctx.set("serviceId", abTestRoute.getEndpoint());
+            // ctx.set("serviceId", abTestRoute.getEndpoint());
         }
         return null;
     }
