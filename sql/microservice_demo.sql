@@ -11,7 +11,7 @@
  Target Server Version : 50720
  File Encoding         : 65001
 
- Date: 02/01/2020 00:01:35
+ Date: 04/01/2020 21:41:40
 */
 
 SET NAMES utf8mb4;
@@ -33,7 +33,7 @@ CREATE TABLE `abtesting`  (
 -- ----------------------------
 -- Records of abtesting
 -- ----------------------------
-INSERT INTO `abtesting` VALUES (1, 'organizationservice', 'Y', 'orgservice-new', 5);
+INSERT INTO `abtesting` VALUES (1, 'organizationservice', 'Y', 'http://localhost:9004', 5);
 
 -- ----------------------------
 -- Table structure for license
