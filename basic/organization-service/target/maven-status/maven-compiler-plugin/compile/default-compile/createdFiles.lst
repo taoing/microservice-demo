@@ -1,6 +1,0 @@
-com\taoing\organizationservice\model\Organization.class
-com\taoing\organizationservice\service\OrganizationService.class
-com\taoing\organizationservice\service\impl\OrganizationServiceImpl.class
-com\taoing\organizationservice\controller\OrganizationServiceController.class
-com\taoing\organizationservice\mapper\OrganizationMapper.class
-com\taoing\organizationservice\OrganizationServiceApplication.class

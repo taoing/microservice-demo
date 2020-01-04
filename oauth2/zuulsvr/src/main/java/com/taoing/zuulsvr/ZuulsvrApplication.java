@@ -33,7 +33,7 @@ public class ZuulsvrApplication {
         RestTemplate template = new RestTemplate();
         List<ClientHttpRequestInterceptor> interceptors = template.getInterceptors();
         // 向restTemplate添加自定义的请求拦截器
-        if (interceptors == null) {
+        if (interceptors.isEmpty()) {
             template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
         } else {
             interceptors.add(new UserContextInterceptor());

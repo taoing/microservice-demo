@@ -16,10 +16,9 @@ public class UserContextFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
 
-        log.info("****** I am entering the service with auth token: {}, remote address: {}:{}",
+        log.info("****** I am entering the service with auth token: {}, remote user: {}",
                 httpServletRequest.getHeader(UserContext.AUTH_TOKEN),
-                httpServletRequest.getRemoteHost(),
-                httpServletRequest.getRemotePort());
+                httpServletRequest.getRemoteUser());
 
         UserContextHolder.getContext().setCorrelationId(httpServletRequest.getHeader(UserContext.CORRELATION_ID));
         UserContextHolder.getContext().setUserId(httpServletRequest.getHeader(UserContext.USER_ID));

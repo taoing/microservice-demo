@@ -1,6 +1,5 @@
 package com.taoing.licensingservice;
 
-import com.taoing.licensingservice.utils.OAuth2TokenInterceptor;
 import com.taoing.licensingservice.utils.UserContextInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,7 +14,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.web.client.RestTemplate;
 import tk.mybatis.spring.annotation.MapperScan;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,15 +53,9 @@ public class LicensingServiceApplication {
         List<ClientHttpRequestInterceptor> interceptors = template.getInterceptors();
         // 向restTemplate添加自定义的请求拦截器
         if (interceptors.isEmpty()) {
-            List<ClientHttpRequestInterceptor> interceptors1 = new ArrayList<>();
-            interceptors1.add(new UserContextInterceptor());
-            interceptors1.add(new OAuth2TokenInterceptor());
-            template.setInterceptors(interceptors1);
-//            template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
+            template.setInterceptors(Collections.singletonList(new UserContextInterceptor()));
         } else {
             interceptors.add(new UserContextInterceptor());
-            interceptors.add(new OAuth2TokenInterceptor());
-
             template.setInterceptors(interceptors);
         }
         return template;
