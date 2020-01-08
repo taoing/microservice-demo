@@ -1,0 +1,52 @@
+server:
+  port: 9001
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+mybatis:
+  mapper-locations: classpath:com/taoing/licensingservice/mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  type-aliases-package: com.taoing.licensingservice.model
+
+mapper:
+  mappers: com.taoing.licensingservice.base.MyMapper
+  not-empty: false
+  identity: mysql
+
+example:
+  my:
+    value: licensingservice-default
+
+feign:
+  hystrix:
+    enabled: true
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        # 输入通道名称
+        input:
+          # 订阅的消息队列或主题名称
+          destination: orgChangeTopic
+          # 消息序列化格式
+          content-type: application/json
+          # 所属消费者组名称
+          group: licensingGroup
+      kafka:
+        binder:
+          zkNodes: localhost
+          brokers: localhost
+
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
