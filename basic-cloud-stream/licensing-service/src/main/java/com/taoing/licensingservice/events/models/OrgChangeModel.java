@@ -1,10 +1,8 @@
 package com.taoing.licensingservice.events.models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class OrgChangeModel {
     private String type;
     private String action;

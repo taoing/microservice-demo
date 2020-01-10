@@ -33,13 +33,17 @@ spring:
   cloud:
     stream:
       bindings:
-        # 输入通道名称
-        input:
-          # 订阅的消息队列或主题名称
+#        # 输入通道名称
+#        input:
+#          # 订阅的消息队列或主题名称
+#          destination: orgChangeTopic
+#          # 消息序列化格式
+#          content-type: application/json
+#          # 所属消费者组名称
+#          group: licensingGroup
+        inboundOrgChanges:
           destination: orgChangeTopic
-          # 消息序列化格式
           content-type: application/json
-          # 所属消费者组名称
           group: licensingGroup
       kafka:
         binder:

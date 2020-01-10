@@ -28,7 +28,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization getOrg(Integer orgId) {
-        return this.mapper.selectByPrimaryKey(orgId);
+        Organization org = this.mapper.selectByPrimaryKey(orgId);
+
+        this.simpleSourceBean.publishOrgChange("GET", org.getId());
+        return org;
     }
 
     @Override

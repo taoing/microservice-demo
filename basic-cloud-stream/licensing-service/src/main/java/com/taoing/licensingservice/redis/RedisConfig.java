@@ -19,16 +19,20 @@ public class RedisConfig {
         RedisTemplate<String, Organization> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(cf);
         redisTemplate.setKeySerializer(new StringRedisSerializer());
+        // JdkSerializationRedisSerializer为默认的value序列化机制
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
         return redisTemplate;
     }
 
-//    @Bean
-//    public RedisTemplate<String, Organization> jsonRedis(RedisConnectionFactory cf) {
-//        RedisTemplate<String, Organization> redisTemplate = new RedisTemplate<>();
-//        redisTemplate.setConnectionFactory(cf);
-//        redisTemplate.setKeySerializer(new StringRedisSerializer());
-//        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Organization.class));
-//        return redisTemplate;
-//    }
+    @Bean
+    public RedisTemplate<String, Organization> jsonRedis(RedisConnectionFactory cf) {
+        RedisTemplate<String, Organization> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(cf);
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(Organization.class));
+        // 额外为hash里的key, value设置序列化器
+        redisTemplate.setHashKeySerializer(new Jackson2JsonRedisSerializer<>(Integer.class));
+        redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(Organization.class));
+        return redisTemplate;
+    }
 }

@@ -3,6 +3,7 @@ package com.taoing.licensingservice.redis;
 import com.taoing.licensingservice.model.Organization;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -17,6 +18,7 @@ import java.nio.charset.StandardCharsets;
 @Component
 public class RedisDemo {
 
+    @Qualifier("jdkRedis")
     @Autowired
     private RedisTemplate<String, Organization> redisTemplate;
 
