@@ -1,0 +1,40 @@
+server:
+  port: 9002
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+mybatis:
+  mapper-locations: classpath:com/taoing/organizationservice/mapper/*.xml
+  configuration:
+    jdbc-type-for-null: null
+  type-aliases-package: com.taoing.organizationservice.model
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        # 输出通道名称
+        output:
+          # 要写入消息的消息队列或主题名称
+          destination: orgChangeTopic
+          # 消息序列化格式
+          content-type: application/json
+      # 指定使用kafka作为消息总线
+      kafka:
+        binder:
+          # zookeeper位置
+          zkNodes: localhost
+          # kafka网络位置
+          brokers: localhost
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://localhost:9411/
